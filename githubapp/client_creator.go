@@ -99,7 +99,7 @@ var (
 
 type key string
 
-const installationKey = key("installationID")
+const InstallationKey = key("installationID")
 
 // NewClientCreator returns a ClientCreator that creates a GitHub client for
 // installations of the app specified by the provided arguments.
@@ -405,7 +405,7 @@ func makeUserAgent(base, details string) string {
 func setInstallationID(installationID int64) ClientMiddleware {
 	return func(next http.RoundTripper) http.RoundTripper {
 		return roundTripperFunc(func(r *http.Request) (*http.Response, error) {
-			r = r.WithContext(context.WithValue(r.Context(), installationKey, installationID))
+			r = r.WithContext(context.WithValue(r.Context(), InstallationKey, installationID))
 			return next.RoundTrip(r)
 		})
 	}

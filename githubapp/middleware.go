@@ -56,7 +56,7 @@ func ClientMetrics(registry metrics.Registry) ClientMiddleware {
 
 	return func(next http.RoundTripper) http.RoundTripper {
 		return roundTripperFunc(func(r *http.Request) (*http.Response, error) {
-			installationID, ok := r.Context().Value(installationKey).(int64)
+			installationID, ok := r.Context().Value(InstallationKey).(int64)
 			if !ok {
 				installationID = 0
 			}
